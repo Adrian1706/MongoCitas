@@ -123,93 +123,94 @@ db.createCollection("usuario", {
   })
     
   db.usuario.insertMany([
-  {
-    usu_id: 1,
-    usu_nombre: "Juan",
-    usu_segundo_nombre: "Carlos",
-    usu_primer_apellido: "Perez",
-    usu_segundo_apellido: "Gomez",
-    usu_telefono: "123456789",
-    usu_direccion: "Calle 123",
-    usu_email: "juan@example.com",
-    usu_tipodoc: {
-      tipdoc_id: 1,
-      tipdoc_nombre: "Cédula",
-      tipdoc_abreviatura: "CC"
+    {
+      usu_id: 1,
+      usu_nombre: "Laura",
+      usu_segundo_nombre: "Isabel",
+      usu_primer_apellido: "García",
+      usu_segundo_apellido: "Martínez",
+      usu_telefono: "555111222",
+      usu_direccion: "Carrera 789",
+      usu_email: "laura@example.com",
+      usu_tipodoc: {
+        tipdoc_id: 1,
+        tipdoc_nombre: "Cédula",
+        tipdoc_abreviatura: "CC"
+      },
+      usu_genero: {
+        gen_id: 2,
+        gen_nombre: "Femenino",
+        gen_abreviatura: "F"
+      },
+      usu_acudiente: {
+        acu_codigo: 3,
+        acu_nombreCompleto: "Patricia Acudiente",
+        acu_telefono: "333444555",
+        acu_direccion: "Avenida Acudiente 789"
+      }
     },
-    usu_genero: {
-      gen_id: 1,
-      gen_nombre: "Masculino",
-      gen_abreviatura: "M"
+    {
+      usu_id: 2,
+      usu_nombre: "Carlos",
+      usu_segundo_nombre: "Javier",
+      usu_primer_apellido: "Ramírez",
+      usu_segundo_apellido: "López",
+      usu_telefono: "666777888",
+      usu_direccion: "Calle 789",
+      usu_email: "carlos@example.com",
+      usu_tipodoc: {
+        tipdoc_id: 2,
+        tipdoc_nombre: "Pasaporte",
+        tipdoc_abreviatura: "PAS"
+      },
+      usu_genero: {
+        gen_id: 1,
+        gen_nombre: "Masculino",
+        gen_abreviatura: "M"
+      },
+      usu_acudiente: {
+        acu_codigo: 4,
+        acu_nombreCompleto: "Manuel Acudiente",
+        acu_telefono: "999000111",
+        acu_direccion: "Calle Acudiente 456"
+      }
     },
-    usu_acudiente: {
-      acu_codigo: 2,
-      acu_nombreCompleto: "Maria Acudiente",
-      acu_telefono: "987654321",
-      acu_direccion: "Avenida Acudiente 456"
+    {
+      usu_id: 3,
+      usu_nombre: "Ana",
+      usu_segundo_nombre: "María",
+      usu_primer_apellido: "Hernández",
+      usu_segundo_apellido: "Pérez",
+      usu_telefono: "222333444",
+      usu_direccion: "Avenida Principal",
+      usu_email: "ana@example.com",
+      usu_tipodoc: {
+        tipdoc_id: 1,
+        tipdoc_nombre: "Cédula",
+        tipdoc_abreviatura: "CC"
+      },
+      usu_genero: {
+        gen_id: 2,
+        gen_nombre: "Femenino",
+        gen_abreviatura: "F"
+      },
+      usu_acudiente: {
+        acu_codigo: 3,
+        acu_nombreCompleto: "Patricia Acudiente",
+        acu_telefono: "333444555",
+        acu_direccion: "Avenida Acudiente 789"
+      }
     }
-  },
-  {
-    usu_id: 2,
-    usu_nombre: "Andrea",
-    usu_segundo_nombre: "Elena",
-    usu_primer_apellido: "Rodriguez",
-    usu_segundo_apellido: "Lopez",
-    usu_telefono: "987654321",
-    usu_direccion: "Avenida 456",
-    usu_email: "maria@example.com",
-    usu_tipodoc: {
-      tipdoc_id: 2,
-      tipdoc_nombre: "Pasaporte",
-      tipdoc_abreviatura: "PAS"
-    },
-    usu_genero: {
-      gen_id: 2,
-      gen_nombre: "Femenino",
-      gen_abreviatura: "F"
-    },
-    usu_acudiente: {
-      acu_codigo: 1,
-      acu_nombreCompleto: "Juan Acudiente",
-      acu_telefono: "123456789",
-      acu_direccion: "Calle Acudiente 123"
-    }
-  },
-  {
-    usu_id: 3,
-    usu_nombre: "Pedro",
-    usu_segundo_nombre: "Antonio",
-    usu_primer_apellido: "Lopez",
-    usu_segundo_apellido: "Gomez",
-    usu_telefono: "555555555",
-    usu_direccion: "Calle Principal",
-    usu_email: "pedro@example.com",
-    usu_tipodoc: {
-      tipdoc_id: 1,
-      tipdoc_nombre: "Cédula",
-      tipdoc_abreviatura: "CC"
-    },
-    usu_genero: {
-      gen_id: 1,
-      gen_nombre: "Masculino",
-      gen_abreviatura: "M"
-    },
-    usu_acudiente: {
-      acu_codigo: 2,
-      acu_nombreCompleto: "Maria Acudiente",
-      acu_telefono: "987654321",
-      acu_direccion: "Avenida Acudiente 456"
-    }
-  }
-]);
+  ]);
+  
 
-db.medico.insertMany( [
+  db.medico.insertMany([
     {
       med_nroMatriculaProfesional: 12345,
-      med_nombreCompleto: "Dr. Pérez",
+      med_nombreCompleto: "Dra. Rodríguez",
       med_consultorio: {
-        cons_codigo: 1,
-        cons_nombre: "Consultorio A"
+        cons_codigo: 3,
+        cons_nombre: "Consultorio C"
       },
       med_especialidad: {
         esp_id: 1,
@@ -218,10 +219,10 @@ db.medico.insertMany( [
     },
     {
       med_nroMatriculaProfesional: 67890,
-      med_nombreCompleto: "Dra. Martínez",
+      med_nombreCompleto: "Dr. Gómez",
       med_consultorio: {
-        cons_codigo: 2,
-        cons_nombre: "Consultorio B"
+        cons_codigo: 4,
+        cons_nombre: "Consultorio D"
       },
       med_especialidad: {
         esp_id: 2,
@@ -230,10 +231,10 @@ db.medico.insertMany( [
     },
     {
       med_nroMatriculaProfesional: 54321,
-      med_nombreCompleto: "Dr. Sánchez",
+      med_nombreCompleto: "Dra. Fernández",
       med_consultorio: {
-        cons_codigo: 1,
-        cons_nombre: "Consultorio A"
+        cons_codigo: 3,
+        cons_nombre: "Consultorio C"
       },
       med_especialidad: {
         esp_id: 3,
@@ -242,13 +243,14 @@ db.medico.insertMany( [
     }
   ]);
   
-db.cita.insertMany([
+  
+  db.cita.insertMany([
     {
       cit_codigo: 1,
       cit_fecha: ISODate("2023-08-25"),
       cit_estadoCita: {
-        est_cita_id: 1,
-        est_cita_nombre: "Pendiente"
+        est_cita_id: 2,
+        est_cita_nombre: "Confirmada"
       },
       cit_medico: 12345, 
       cit_datosUsuario: 1 
@@ -257,8 +259,8 @@ db.cita.insertMany([
       cit_codigo: 2,
       cit_fecha: ISODate("2023-08-28"),
       cit_estadoCita: {
-        est_cita_id: 2,
-        est_cita_nombre: "Confirmada"
+        est_cita_id: 1,
+        est_cita_nombre: "Pendiente"
       },
       cit_medico: 67890, 
       cit_datosUsuario: 2 
@@ -267,11 +269,10 @@ db.cita.insertMany([
       cit_codigo: 3,
       cit_fecha: ISODate("2023-09-01"),
       cit_estadoCita: {
-        est_cita_id: 1,
-        est_cita_nombre: "Pendiente"
+        est_cita_id: 2,
+        est_cita_nombre: "Confirmada"
       },
       cit_medico: 54321,
       cit_datosUsuario: 3 
     }
   ]);
-  
