@@ -1,4 +1,4 @@
-use("Citas");
+use("db_citas_mongo");
 
 db.createCollection("usuario", {
     validator: {
