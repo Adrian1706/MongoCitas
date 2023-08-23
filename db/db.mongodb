@@ -200,6 +200,32 @@ db.createCollection("usuario", {
         acu_telefono: "333444555",
         acu_direccion: "Avenida Acudiente 789"
       }
+    },
+    {
+      usu_id: 4,
+      usu_nombre: "Ana",
+      usu_segundo_nombre: "María",
+      usu_primer_apellido: "Pérez",
+      usu_segundo_apellido: "López",
+      usu_telefono: "555666777",
+      usu_direccion: "Calle 123",
+      usu_email: "ana@example.com",
+      usu_tipodoc: {
+        tipdoc_id: 1,
+        tipdoc_nombre: "Cédula",
+        tipdoc_abreviatura: "CC"
+      },
+      usu_genero: {
+        gen_id: 2,
+        gen_nombre: "Femenino",
+        gen_abreviatura: "F"
+      },
+      usu_acudiente: {
+        acu_codigo: 3,
+        acu_nombreCompleto: "Roberto Acudiente",
+        acu_telefono: "333444555",
+        acu_direccion: "Avenida Acudiente 456"
+      }
     }
   ]);
   
@@ -240,6 +266,18 @@ db.createCollection("usuario", {
         esp_id: 3,
         esp_nombre: "Cardiología"
       }
+    },
+    {
+      med_nroMatriculaProfesional: 98765,
+      med_nombreCompleto: "Dr. Bueno",
+      med_consultorio: {
+        cons_codigo: 4,
+        cons_nombre: "Consultorio A"
+      },
+      med_especialidad: {
+        esp_id: 3,
+        esp_nombre: "Dermatología"
+      }
     }
   ]);
   
@@ -274,5 +312,15 @@ db.createCollection("usuario", {
       },
       cit_medico: 54321,
       cit_datosUsuario: 3 
+    },
+    {
+      cit_codigo: 4, 
+      cit_fecha: ISODate("2023-12-17"),
+      cit_estadoCita: {
+        est_cita_id: 3,
+        est_cita_nombre: "Rechazada"
+      },
+      cit_medico: 98765, 
+      cit_datosUsuario: 4 
     }
   ]);

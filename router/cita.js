@@ -57,6 +57,8 @@ appCita.get("/fecha/:fecha", async (req, res) => {
 
 appCita.get("/citasGenero/:gen_id/estado/:estado", async (req, res) => {
 
+    /** http://127.0.0.1:5060/cita/citasGenero/1/estado/Pendiente */
+
     const gen_id = parseInt(req.params.gen_id);
     const estado = req.params.estado;
 
@@ -95,8 +97,61 @@ appCita.get("/citasGenero/:gen_id/estado/:estado", async (req, res) => {
         console.error("Error:", error);
         res.status(500).send("Error interno del servidor");
     }
- /** http://127.0.0.1:5060/cita/citasGenero/1/estado/Pendiente */
+ 
 });
 
+appCita.get("/citasRechazadas/:estado/:mes", async (req, res) => {
+
+    /** http://127.0.0.1:5060/cita/citasRechazadas/Rechazada/12 */
+
+    const estado = req.params.estado;
+    const mes = parseInt(req.params.mes);
+
+    try {
+        let db = await conexion();
+        let cita = db.collection('cita');
+        
+        let result = await cita.aggregate([
+            {
+                $lookup: {
+                    from: "usuario",
+                    localField: "cit_datosUsuario",
+                    foreignField: "usu_id",
+                    as: "usuario"
+                }
+            },
+            {
+                $lookup: {
+                    from: "medico",
+                    localField: "cit_medico",
+                    foreignField: "med_nroMatriculaProfesional",
+                    as: "medico"
+                }
+            },
+            {
+                $match: {
+                    "cit_estadoCita.est_cita_nombre": estado,
+                    "cit_fecha": {
+                        $gte: new Date(2023, mes - 1, 1),
+                        $lt: new Date(2023, mes, 1)
+                    }
+                }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    cit_fecha: 1,
+                    usuario: { $arrayElemAt: ["$usuario.usu_nombre", 0] },
+                    medico: { $arrayElemAt: ["$medico.med_nombreCompleto", 0] }
+                }
+            }
+        ]).toArray();
+
+        res.send(result);
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(500).send("Error interno del servidor");
+    }
+});
 
 export default appCita;
