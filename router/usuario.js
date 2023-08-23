@@ -68,4 +68,32 @@ appUsuario.get("/consultorias/:usu_id", async (req, res) => {
     res.send(consultoriasDetalladas);
 });
 
+appUsuario.get("/consultorios/:usu_id", async (req, res) => {
+    const usu_id = parseInt(req.params.usu_id);
+
+    const Cita = db.collection('cita');
+    const Medico = db.collection('medico');
+    const Usuario = db.collection('usuario');
+    
+    const citasDelPaciente = await Cita.find({
+        "cit_datosUsuario": usu_id
+    }).toArray();
+
+    const consultorios = [];
+
+    for (const cita of citasDelPaciente) {
+        const medico = await Medico.findOne({
+            "med_nroMatriculaProfesional": cita.cit_medico
+        });
+
+        if (medico) {
+            consultorios.push({
+                cons_nombre: medico.med_consultorio.cons_nombre
+            });
+        }
+    }
+
+    res.send(consultorios);
+});
+
 export default appUsuario;
