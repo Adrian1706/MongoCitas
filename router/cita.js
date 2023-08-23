@@ -55,4 +55,48 @@ appCita.get("/fecha/:fecha", async (req, res) => {
     res.send(citasEnFecha);
 });
 
+appCita.get("/citasGenero/:gen_id/estado/:estado", async (req, res) => {
+
+    const gen_id = parseInt(req.params.gen_id);
+    const estado = req.params.estado;
+
+    try {
+        let cita = db.collection('cita');
+        
+        let result = await cita.aggregate([
+            {
+                $lookup: {
+                    from: "usuario",
+                    localField: "cit_datosUsuario",
+                    foreignField: "usu_id",
+                    as: "usuario"
+                }
+            },
+            {
+                $match: {
+                    "usuario.usu_genero.gen_id": gen_id,
+                    "cit_estadoCita.est_cita_nombre": estado
+                }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    cit_codigo: 1,
+                    cit_fecha: 1,
+                    cit_estadoCita: 1,
+                    cit_medico: 1,
+                    cit_datosUsuario: 1
+                }
+            }
+        ]).toArray();
+
+        res.send(result);
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(500).send("Error interno del servidor");
+    }
+ /** http://127.0.0.1:5060/cita/citasGenero/1/estado/Pendiente */
+});
+
+
 export default appCita;
