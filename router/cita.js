@@ -1,5 +1,6 @@
 import { conexion } from "../db/atlas.js";
 import { Router } from "express";
+import { limitGrt } from "../limit/config.js";
 
 const appCita = Router();
 
@@ -7,8 +8,9 @@ let db = await conexion();
 
 let Cita = db.collection('cita');
 
-appCita.get("/", async(req, res)=>{
-
+appCita.get("/", limitGrt(), async(req, res)=>{
+    if(!req.rateLimit) return; 
+    console.log(req.rateLimit);
     let db = await conexion();
     let Cita = db.collection('cita');
     let result = await Cita.find({}).sort({cit_codigo:1}).toArray();
@@ -16,8 +18,9 @@ appCita.get("/", async(req, res)=>{
 
 });
 
-appCita.get("/:usu_id", async (req, res) => {
-
+appCita.get("/:usu_id", limitGrt(), async(req, res) => {
+    if(!req.rateLimit) return; 
+    console.log(req.rateLimit);
     const usu_id = parseInt(req.params.usu_id); 
 
     try {
@@ -42,8 +45,9 @@ appCita.get("/:usu_id", async (req, res) => {
 
 });
 
-appCita.get("/fecha/:fecha", async (req, res) => {
-
+appCita.get("/fecha/:fecha", limitGrt(), async(req, res) => {
+    if(!req.rateLimit) return; 
+    console.log(req.rateLimit);
     const fecha = new Date(req.params.fecha);
 
     const Cita = db.collection('cita');
@@ -55,8 +59,9 @@ appCita.get("/fecha/:fecha", async (req, res) => {
     res.send(citasEnFecha);
 });
 
-appCita.get("/citasGenero/:gen_id/estado/:estado", async (req, res) => {
-
+appCita.get("/citasGenero/:gen_id/estado/:estado", limitGrt(), async (req, res) => {
+    if(!req.rateLimit) return; 
+    console.log(req.rateLimit);
     /** http://127.0.0.1:5060/cita/citasGenero/1/estado/Pendiente */
 
     const gen_id = parseInt(req.params.gen_id);
@@ -100,8 +105,9 @@ appCita.get("/citasGenero/:gen_id/estado/:estado", async (req, res) => {
  
 });
 
-appCita.get("/citasRechazadas/:estado/:mes", async (req, res) => {
-
+appCita.get("/citasRechazadas/:estado/:mes", limitGrt(), async (req, res) => {
+    if(!req.rateLimit) return; 
+    console.log(req.rateLimit);
     /** http://127.0.0.1:5060/cita/citasRechazadas/Rechazada/12 */
 
     const estado = req.params.estado;

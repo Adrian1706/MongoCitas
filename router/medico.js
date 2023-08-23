@@ -1,5 +1,6 @@
 import { conexion } from "../db/atlas.js";
 import { Router } from "express";
+import { limitGrt } from "../limit/config.js";
 
 const appMedico = Router();
 
@@ -7,8 +8,9 @@ let db = await conexion();
 
 let Medico = db.collection('medico');
 
-appMedico.get("/especialidad/:esp_nombre", async(req, res)=>{
-
+appMedico.get("/especialidad/:esp_nombre", limitGrt(), async(req, res)=>{
+    if(!req.rateLimit) return; 
+    console.log(req.rateLimit);
     const esp_nombre = req.params.esp_nombre;
 
     let db = await conexion();
@@ -18,8 +20,9 @@ appMedico.get("/especialidad/:esp_nombre", async(req, res)=>{
 
 });
 
-appMedico.get("/consultorios", async (req, res) => {
-
+appMedico.get("/consultorios", limitGrt(), async (req, res) => {
+    if(!req.rateLimit) return; 
+    console.log(req.rateLimit);
     let db = await conexion();
       let medico = db.collection("medico");
   
@@ -35,7 +38,9 @@ appMedico.get("/consultorios", async (req, res) => {
       
 });
 
-appMedico.get("/citas/:med_nroMatriculaProfesional/:fecha", async (req, res) => {
+appMedico.get("/citas/:med_nroMatriculaProfesional/:fecha", limitGrt(), async (req, res) => {
+    if(!req.rateLimit) return; 
+    console.log(req.rateLimit);
     const med_nroMatriculaProfesional = parseInt(req.params.med_nroMatriculaProfesional);
     const fecha = new Date(req.params.fecha);
 
