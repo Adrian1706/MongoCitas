@@ -37,4 +37,35 @@ appUsuario.get("/:med_nroMatriculaProfesional", async (req, res) => {
     res.send(pacientes);
 });
 
+appUsuario.get("/consultorias/:usu_id", async (req, res) => {
+
+    const usu_id = parseInt(req.params.usu_id);
+
+    const Cita = db.collection('cita');
+    const Medico = db.collection('medico');
+    
+    const consultoriasPaciente = await Cita.find({
+        "cit_datosUsuario": usu_id
+    }).toArray();
+
+    const consultoriasDetalladas = [];
+
+    for (const consultoria of consultoriasPaciente) {
+        const medico = await Medico.findOne({
+            "med_nroMatriculaProfesional": consultoria.cit_medico
+        });
+
+        const consultoriaDetallada = {
+            cit_codigo: consultoria.cit_codigo,
+            cit_fecha: consultoria.cit_fecha,
+            cit_estadoCita: consultoria.cit_estadoCita,
+            medico: medico
+        };
+
+        consultoriasDetalladas.push(consultoriaDetallada);
+    }
+
+    res.send(consultoriasDetalladas);
+});
+
 export default appUsuario;
