@@ -34,4 +34,33 @@ appMedico.get("/consultorios", async (req, res) => {
       res.send(result);
       
 });
+
+appMedico.get("/citas/:med_nroMatriculaProfesional/:fecha", async (req, res) => {
+    const med_nroMatriculaProfesional = parseInt(req.params.med_nroMatriculaProfesional);
+    const fecha = new Date(req.params.fecha);
+
+    try {
+        let cita = db.collection('cita');
+        
+        let result = await cita.aggregate([
+            {
+                $match: {
+                    cit_medico: med_nroMatriculaProfesional,
+                    cit_fecha: fecha
+                }
+            },
+            {
+                $group: {
+                    _id: "$cit_medico",
+                    totalCitas: { $sum: 1 }
+                }
+            }
+        ]).toArray();
+
+        res.send(result);
+    } catch (error) {
+        console.error("Error:", error);
+    }
+});
+
 export default appMedico;
