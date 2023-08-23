@@ -42,5 +42,17 @@ appCita.get("/:usu_id", async (req, res) => {
 
 });
 
+appCita.get("/fecha/:fecha", async (req, res) => {
+
+    const fecha = new Date(req.params.fecha);
+
+    const Cita = db.collection('cita');
+    
+    const citasEnFecha = await Cita.find({
+        "cit_fecha": fecha
+    }).toArray();
+
+    res.send(citasEnFecha);
+});
 
 export default appCita;
