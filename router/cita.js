@@ -1,6 +1,7 @@
 import { conexion } from "../db/atlas.js";
 import { Router } from "express";
 import { limitGrt } from "../limit/config.js";
+import { validarToken } from "../middleware/JWT.js";
 
 const appCita = Router();
 
@@ -8,7 +9,7 @@ let db = await conexion();
 
 let Cita = db.collection('cita');
 
-appCita.get("/", limitGrt(), async(req, res)=>{
+appCita.get("/cita", limitGrt(), validarToken, async(req, res)=>{
     if(!req.rateLimit) return; 
     console.log(req.rateLimit);
     let db = await conexion();
@@ -18,7 +19,7 @@ appCita.get("/", limitGrt(), async(req, res)=>{
 
 });
 
-appCita.get("/:usu_id", limitGrt(), async(req, res) => {
+appCita.get("/cita/:usu_id", limitGrt(), validarToken, async(req, res) => {
     if(!req.rateLimit) return; 
     console.log(req.rateLimit);
     const usu_id = parseInt(req.params.usu_id); 
@@ -45,7 +46,7 @@ appCita.get("/:usu_id", limitGrt(), async(req, res) => {
 
 });
 
-appCita.get("/fecha/:fecha", limitGrt(), async(req, res) => {
+appCita.get("/cita/fecha/:fecha", limitGrt(), validarToken, async(req, res) => {
     if(!req.rateLimit) return; 
     console.log(req.rateLimit);
     const fecha = new Date(req.params.fecha);
@@ -59,10 +60,9 @@ appCita.get("/fecha/:fecha", limitGrt(), async(req, res) => {
     res.send(citasEnFecha);
 });
 
-appCita.get("/citasGenero/:gen_id/estado/:estado", limitGrt(), async (req, res) => {
+appCita.get("/cita/citasGenero/:gen_id/estado/:estado", limitGrt(), validarToken, async (req, res) => {
     if(!req.rateLimit) return; 
     console.log(req.rateLimit);
-    /** http://127.0.0.1:5060/cita/citasGenero/1/estado/Pendiente */
 
     const gen_id = parseInt(req.params.gen_id);
     const estado = req.params.estado;
@@ -105,10 +105,9 @@ appCita.get("/citasGenero/:gen_id/estado/:estado", limitGrt(), async (req, res) 
  
 });
 
-appCita.get("/citasRechazadas/:estado/:mes", limitGrt(), async (req, res) => {
+appCita.get("/cita/citasRechazadas/:estado/:mes", limitGrt(), validarToken, async (req, res) => {
     if(!req.rateLimit) return; 
     console.log(req.rateLimit);
-    /** http://127.0.0.1:5060/cita/citasRechazadas/Rechazada/12 */
 
     const estado = req.params.estado;
     const mes = parseInt(req.params.mes);

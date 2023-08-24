@@ -1,6 +1,7 @@
 import { conexion } from "../db/atlas.js";
 import { Router } from "express";
 import { limitGrt } from "../limit/config.js";
+import { validarToken } from "../middleware/JWT.js";
 
 const appMedico = Router();
 
@@ -8,7 +9,7 @@ let db = await conexion();
 
 let Medico = db.collection('medico');
 
-appMedico.get("/especialidad/:esp_nombre", limitGrt(), async(req, res)=>{
+appMedico.get("/medico/especialidad/:esp_nombre", limitGrt(), validarToken, async(req, res)=>{
     if(!req.rateLimit) return; 
     console.log(req.rateLimit);
     const esp_nombre = req.params.esp_nombre;
@@ -20,7 +21,7 @@ appMedico.get("/especialidad/:esp_nombre", limitGrt(), async(req, res)=>{
 
 });
 
-appMedico.get("/consultorios", limitGrt(), async (req, res) => {
+appMedico.get("/medico/consultorios", limitGrt(), validarToken, async (req, res) => {
     if(!req.rateLimit) return; 
     console.log(req.rateLimit);
     let db = await conexion();
@@ -38,7 +39,7 @@ appMedico.get("/consultorios", limitGrt(), async (req, res) => {
       
 });
 
-appMedico.get("/citas/:med_nroMatriculaProfesional/:fecha", limitGrt(), async (req, res) => {
+appMedico.get("/medico/citas/:med_nroMatriculaProfesional/:fecha", limitGrt(), validarToken, async (req, res) => {
     if(!req.rateLimit) return; 
     console.log(req.rateLimit);
     const med_nroMatriculaProfesional = parseInt(req.params.med_nroMatriculaProfesional);

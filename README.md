@@ -53,15 +53,16 @@ El servidor se ejecutará en un puerto que se mostrará en la terminal.
 
 ## Url
 
-1. Obtener todos los pacientes alfabéticamente = http://127.10.10.10:5060/pacientes
-2. Obtener todas las citas alfabéticamente = http://127.10.10.10:5060/cita
-3. Obtener todos los médicos de una especialidad específica (por ejemplo,  **'Cardiología'** )=http://127.10.10.10:5060/medico/especialidad/Pediatría
-4. Encontrar la próxima cita para un paciente específico (por ejemplo, el paciente con  **usu_id 1** )=http://127.10.10.10:5060/cita/1
-5. Encontrar todos los pacientes que tienen citas con un médico específico (por ejemplo, el médico con  **med_nroMatriculaProsional 1** )=http://127.10.10.10:5060/pacientes/12345
-6. Obtener las consultorías para un paciente específico (por ejemplo, paciente  **con usu_id 1** )=http://127.10.10.10:5060/pacientes/consultorias/1
-7. Encontrar todas las citas para un día específico (por ejemplo,  **'2023-07-12'** )=http://127.10.10.10:5060/cita/fecha/2023-08-25
-8. Obtener los médicos y sus consultorios **=**http://127.10.10.10:5060/medico/consultorios
-9. Contar el número de citas que un médico tiene en un día específico http://127.10.10.10:5060/medico/citas/12345/2023-08-25
-10. Obtener los consultorio donde se aplicó las citas de un pacientehttp://127.10.10.10:5060/pacientes/consultorios/1
-11. Obtener todas las citas realizadas por los pacientes de un genero si su estado de la cita fue atendidad **=**http://127.10.10.10:5060/cita/citasGenero/1/estado/Pendiente
-12. Mostrar todas las citas que fueron rechazadas y en un mes específico, mostrar la fecha de la cita, el nombre del usuario y el médico.=http://127.10.10.10:5060/cita/citasRechazadas/Rechazada/12
+1. Obtener token (elige según la colección a la que vas a entrar) = http://127.10.10.10:5060/token/usuario - http://127.10.10.10:5060/token/medico - http://127.10.10.10:5060/token/administrador
+2. Obtener todos los pacientes alfabéticamente = http://127.10.10.10:5060/usuario/usuario
+3. Obtener todas las citas alfabéticamente = http://127.10.10.10:5060/cita/cita
+4. Obtener todos los médicos de una especialidad específica (por ejemplo,  **'Cardiología'** )=http://127.10.10.10:5060/medico/medico/especialidad/Pediatría
+5. Encontrar la próxima cita para un paciente específico (por ejemplo, el paciente con  **usu_id 1** )=http://127.10.10.10:5060/cita/cita/1
+6. Encontrar todos los pacientes que tienen citas con un médico específico (por ejemplo, el médico con  **med_nroMatriculaProsional 1** )=http://127.10.10.10:5060/usuario/usuario/12345
+7. Obtener las consultorías para un paciente específico (por ejemplo, paciente  **con usu_id 1** )=http://127.10.10.10:5060/usuario/usuario/consultorias/1
+8. Encontrar todas las citas para un día específico (por ejemplo,  **'2023-07-12'** )=http://127.10.10.10:5060/cita/cita/fecha/2023-08-25
+9. Obtener los médicos y sus consultorios **=**http://127.10.10.10:5060/medico/medico/consultorios
+10. Contar el número de citas que un médico tiene en un día específico http://127.10.10.10:5060/medico/medico/citas/12345/2023-08-25
+11. Obtener los consultorio donde se aplicó las citas de un pacientehttp://127.10.10.10:5060/usuario/usuario/consultorios/1
+12. Obtener todas las citas realizadas por los pacientes de un genero si su estado de la cita fue atendidad **=**http://127.10.10.10:5060/cita/cita/citasGenero/1/estado/Pendiente
+13. Mostrar todas las citas que fueron rechazadas y en un mes específico, mostrar la fecha de la cita, el nombre del usuario y el médico.=http://127.10.10.10:5060/cita/cita/citasRechazadas/Rechazada/12
